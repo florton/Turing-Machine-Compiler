@@ -14,6 +14,7 @@ except:
 input = machine[0]
 output = machine[1]
 states = machine[2]
+edgeReject = machine[3]
 tape = []
     
 def Run():
@@ -53,6 +54,9 @@ def Run():
         try:
             currentEdge = currentState['edges'][str(tape[tapePosition])]
         except:
+            if edgeReject:
+                Output()
+                return False
             error = "Could not find an edge for char: '" + str(tape[tapePosition]) + "' from state: " + str(currentState['name'])
             print "Current position: " + str(tapePosition)
             print tape

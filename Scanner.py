@@ -16,11 +16,13 @@ def Scan(file):
     edgeRegex = re.compile(",?\((\S)->(\S),(R|S|L),(\w+)\)")
     inputRegex = re.compile("Input\((\S*)\)")
     outputRegex = re.compile("Output\(((\d+|),?(\d+|))\)")
+    failRegex = re.compile("MissingEdgeReject\(\)")
     commentRegex = re.compile("//.*")
     
     input = ""
     states = {}
     output = None
+    reject = False
     for line in turingMachine:
         line = line.replace(" ", "")
         if line == '\n':
@@ -51,11 +53,15 @@ def Scan(file):
         if reMatch is not None:
             output = [reMatch.group(2),reMatch.group(3)]
             continue
+        reMatch = re.match(failRegex,line)
+        if reMatch is not None:
+            reject = True
+            continue
         error = "Error Parsing Line: " + line
         raise RuntimeError(error)
     if input == '' and len(sys.argv) >2:
         input = str(sys.argv[2])
-    return (input,output,states)
+    return (input,output,states,reject)
         
 if __name__ == "__main__":
     output = Scan(sys.argv[1])

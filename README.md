@@ -145,6 +145,21 @@ q3 = {accept}                                  #this too
 Output()                                       //me four
 ```
 
+###MissingEdgeReject
+
+Because Turing Machine Language has some minor error reporting, 
+
+If the machine cannot find an edge for the current state and tape value it will crash and give an error such as:
+
+`RuntimeError: Could not find an edge for char: '0' from state: q8`
+
+However, sometimes you want a machine to reject if it gets to a state it cannot continue from.
+
+So, to make your machine reject if it hits a missing edge, call `MissingEdgeReject()` once anywhere in your fie.
+
+see `machine2.tm` & `machine3.tm` for an example
+
+
 ###Bugs&Errors
 
 This interpreter is new and is not extensively tested.
