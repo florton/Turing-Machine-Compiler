@@ -25,7 +25,9 @@ True
 
 ###Input
 Input can only be called once
+
 it can be passed zero or more non-whitspace characters.
+
 Input will be empty if not called
 ```
 Input()
@@ -34,9 +36,13 @@ Input(2312jsndjn32n:"]\-!!2~k3n4n5)
 ```
 ###Output
 Output can only be called once
+
 If it is left blank the machine will print the whole tape
+
 Output takes one or two ints (x,y) or (x)
+
 The machine will print the tape from x inclusive to y non-inclusive
+
 if the index of y is beyond the length of the tape, the machine will print the whole tape with a '#' at the end
 ```
 Output()
@@ -46,34 +52,49 @@ Output(3)
 
 ###States
 **states** must be written in the following format
+
 `name = {modifier, edges }`or `name = { edges }` 
+
 or `name = {modifier}` if it is an accept or reject state
 
 **name** must consist of one or more non-whitspace characters.
+
 names must be unique for each state
 
 **modifier** must be:
+
 `start`  only one start state per machine or
+
 `accept` or `reject`these states should not have edges
 
 **edges**
+
 edges must we written in the following format
+
 seperate multiple edges with commas
+
 `(readChar -> writeChar , moveTape, nextState)`
 
 **readChar**
+
 readChar can be any non-whitespace character that will be read from the tape in the current position
+
 or a `#` to reference the end of the tape
 
 **writeChar**
+
 writeChar can be any non-whitespace character that will be written to the tape in the current position
+
 or a `#` to reference the end of the tape
 
 **moveTape**
+
 moveTape must be `R` `L` or `S`
+
 these correspond to a move of Right Left or Stay from the current position
 
 **nextState**
+
 nextState must be a declared state name
 
 
@@ -101,4 +122,5 @@ Output()                                       //me three
 ###Bugs&Errors
 
 This interpreter is new and is not extensively tested.
-report bugs to florton@lion.lmu.edu
+
+Report bugs to florton@lion.lmu.edu
