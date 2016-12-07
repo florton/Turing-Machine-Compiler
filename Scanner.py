@@ -1,6 +1,11 @@
 import sys
 import re
 
+"""
+Copyright Flanders Lorton 2016
+https://github.com/florton/Turing-Machine-Compiler
+"""
+
 def Scan(file):
     try:
         turingMachine = open(file, 'r')
@@ -11,13 +16,17 @@ def Scan(file):
     edgeRegex = re.compile(",?\((\S)->(\S),(R|S|L),(\w+)\)")
     inputRegex = re.compile("Input\((\S*)\)")
     outputRegex = re.compile("Output\(((\d+|),?(\d+|))\)")
-
+    commentRegex = re.compile("//.*")
+    
     input = ""
     states = {}
     output = None
     for line in turingMachine:
         line = line.replace(" ", "")
         if line == '\n':
+            continue
+        reMatch = re.match(commentRegex,line)
+        if reMatch is not None:
             continue
         reMatch = re.match(stateRegex,line)
         if reMatch is not None:

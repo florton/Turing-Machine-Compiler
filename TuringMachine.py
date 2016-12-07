@@ -1,6 +1,11 @@
 import sys
 from Scanner import Scan
 
+"""
+Copyright Flanders Lorton 2016
+https://github.com/florton/Turing-Machine-Compiler
+"""
+
 try:
     machine = Scan(sys.argv[1])
 except:

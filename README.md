@@ -1,7 +1,9 @@
-#Turing Machine Language Python Interpreter
+#Turing Machine Language Interpreter in Python
 ### © Flanders Lorton 2016
 
 ####I wrote this language and interpreter from scratch to generate turing machines and run them in Python.
+
+####This language is turing complete by definition
 
 
 ##Example machine: Add 1 to a binary number
@@ -27,9 +29,9 @@ True
 
 ##Turing Machine Language Syntax:
 
-The machine returns True if it hits an accept state
+The machine returns `True` if it hits an accept state
 
-The machine returns False if it hits a reject state
+The machine returns `False` if it hits a reject state
 
 There is so guarantee the machine will ever stop if it never hits an accept or reject
 
@@ -59,7 +61,7 @@ Output takes one or two ints (x,y) or (x)
 
 The machine will print the tape from x inclusive to y non-inclusive
 
-if the index of y is beyond the length of the tape, the machine will print the whole tape with a '#' at the end
+if the index of y is beyond the length of the tape, the machine will print the whole tape with one or more `#` at the end
 ```
 Output()
 Output(1,5)
@@ -111,12 +113,16 @@ moveTape must be `R` `L` or `S`
 
 these correspond to a move of Right Left or Stay from the current position
 
+if the tape tries to move Left from the leftmost tape position, it will stay in place
+
+if the tape moves Right from the right most position, it will move and write a `#` to the empty space
+
 **nextState**
 
 nextState must be a declared state name
 
 
-####Examples
+####Example States
 ````
 q1 = {start, (1->1,R,q1), (0->0,R,q1), ($->$,R,q1), (#->#,L,q2)}
 stateX = {(5->1,S,q1)}
@@ -130,10 +136,13 @@ state17 = {reject}
 
 All text after each line will be ignored
 Do not put text before code
+
+Singleline comments must start with `//`
 ````
 q2 = {(1->0,L,q2), (0->1,S,q3), ($->1,S,q3)}   This is a comment
 q3 = {accept}                                  #this too
-Output()                                       //me three
+//another comment
+Output()                                       //me four
 ```
 
 ###Bugs&Errors
