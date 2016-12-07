@@ -7,7 +7,7 @@ def Scan(file):
     except:
         raise RuntimeError("Please specify a valid turing language file")
         
-    stateRegex = re.compile("(\w+)={(start|accept|reject|),?(\S*)}")
+    stateRegex = re.compile("(\w+)={(start|accept|reject)?,?(\S*)}")
     edgeRegex = re.compile(",?\((\S)->(\S),(R|S|L),(\w+)\)")
     inputRegex = re.compile("Input\((\S*)\)")
     outputRegex = re.compile("Output\(((\d+|),?(\d+|))\)")
@@ -17,6 +17,8 @@ def Scan(file):
     output = None
     for line in turingMachine:
         line = line.replace(" ", "")
+        if line == '\n':
+            continue
         reMatch = re.match(stateRegex,line)
         if reMatch is not None:
             parsedEdges = {}
@@ -30,7 +32,7 @@ def Scan(file):
                 nextMove = edge[2]
                 nextState = edge[3]
                 parsedEdges[readChar] = (writeChar,nextMove,nextState)
-            states[stateName] = {'modifier':modifier,'edges':parsedEdges}
+            states[stateName] = {'name': stateName,'modifier':modifier,'edges':parsedEdges}
             continue
         reMatch = re.match(inputRegex,line)
         if reMatch is not None:
@@ -40,7 +42,8 @@ def Scan(file):
         if reMatch is not None:
             output = [reMatch.group(2),reMatch.group(3)]
             continue
-        raise RuntimeError("Error Parsing Line: " + line)
+        error = "Error Parsing Line: " + line
+        raise RuntimeError(error)
     return (input,output,states)
         
 if __name__ == "__main__":

@@ -45,7 +45,13 @@ def Run():
             return False
             
         #Run deterministic edge
-        currentEdge = currentState['edges'][str(tape[tapePosition])]
+        try:
+            currentEdge = currentState['edges'][str(tape[tapePosition])]
+        except:
+            error = "Could not find an edge for char: '" + str(tape[tapePosition]) + "' from state: " + str(currentState['name'])
+            print "Current position: " + str(tapePosition)
+            print tape
+            raise RuntimeError(error)
         tape[tapePosition] = currentEdge[0]
         if currentEdge[1] == 'R':
             tapePosition = tapePosition +1
