@@ -44,6 +44,8 @@ def Scan(file):
             continue
         error = "Error Parsing Line: " + line
         raise RuntimeError(error)
+    if input == '' and len(sys.argv) >2:
+        input = str(sys.argv[2])
     return (input,output,states)
         
 if __name__ == "__main__":

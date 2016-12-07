@@ -15,7 +15,11 @@ q2 = {(1->0,L,q2), (0->1,S,q3), ($->1,S,q3)}
 q3 = {accept}
 Output()
 ```
-###output for machine.tm
+###Usage
+
+`python TuringMachine.py machine.tm`
+
+###Output for machine.tm
 ```
 $1100
 True
@@ -35,6 +39,10 @@ Input can only be called once
 it can be passed zero or more non-whitespace characters.
 
 Input will be empty if not called
+
+if Input is empty, input can be passed as a command line arg
+
+`python TuringMachine.py machine.tm 10020`
 ```
 Input()
 Input(Hello)
@@ -43,7 +51,9 @@ Input(2312jsndjn32n:"]\-!!2~k3n4n5)
 ###Output
 Output can only be called once
 
-If it is left blank the machine will print the whole tape
+if nothing is pass to Output, the machine will print the whole tape
+
+if Output is not called, nothing will print
 
 Output takes one or two ints (x,y) or (x)
 
@@ -69,9 +79,11 @@ names must be unique for each state
 
 **modifier** must be:
 
-`start`  only one start state per machine or
+`start`  only one start state per machine
 
 `accept` or `reject`these states should not have edges
+
+you can have multiple accept and reject states but there's no reason to
 
 **edges**
 
@@ -106,13 +118,12 @@ nextState must be a declared state name
 
 ####Examples
 ````
-
 q1 = {start, (1->1,R,q1), (0->0,R,q1), ($->$,R,q1), (#->#,L,q2)}
 stateX = {(5->1,S,q1)}
 q2 = {(1->0,L,q2), (0->1,S,q3), ($->1,S,q3)}
 q3 = {accept}
 q4 = {accept}
-state17 = {reject, (1->z,R,stateX)}
+state17 = {reject}
 ````
 
 ###Comments
