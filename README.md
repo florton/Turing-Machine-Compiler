@@ -23,10 +23,16 @@ True
 
 ##Turing Machine Language Syntax:
 
+The machine returns True if it hits an accept state
+
+The machine returns False if it hits a reject state
+
+There is so guarantee the machine will ever stop if it never hits an accept or reject
+
 ###Input
 Input can only be called once
 
-it can be passed zero or more non-whitspace characters.
+it can be passed zero or more non-whitespace characters.
 
 Input will be empty if not called
 ```
@@ -57,7 +63,7 @@ Output(3)
 
 or `name = {modifier}` if it is an accept or reject state
 
-**name** must consist of one or more non-whitspace characters.
+**name** must consist of one or more non-whitespace characters.
 
 names must be unique for each state
 
