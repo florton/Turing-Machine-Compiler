@@ -75,7 +75,7 @@ Output(3)
 
 or `name = {modifier}` if it is an accept or reject state
 
-if you want a machine to always accept or reject you can have the start state accept of reject
+if you want a machine to always accept or reject you can have the start state accept or reject
 ````
 //HelloWorld.tm
 Input(Hello_World!)
@@ -153,7 +153,7 @@ q3 = {accept}                                  #this too
 Output()                                       //me four
 ```
 
-###MissingEdgeReject
+###RejectMissingEdges
 
 Because Turing Machine Language has some minor error reporting, 
 
@@ -163,10 +163,19 @@ If the machine cannot find an edge for the current state and tape value it will 
 
 However, sometimes you want a machine to reject if it gets to a state it cannot continue from.
 
-So, to make your machine reject if it hits a missing edge, call `MissingEdgeReject()` once anywhere in your fie.
+So, to make your machine reject if it hits a missing edge, call `RejectMissingEdges()` once anywhere in your fie.
 
 see `machine2.tm` & `machine3.tm` for an example
 
+###Debug
+
+Like any programming language, you're not always going to get your machine right the first time.
+
+To enable logging of states in the console simply call `Debug()` anywhere in the file
+
+This will give you detailed runtime information.
+
+If you want to pause between transitions call `Debug(slow)` to make the interpreter wait for an `Enter` before each move
 
 ###Bugs&Errors
 

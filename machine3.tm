@@ -1,5 +1,5 @@
 // M recognizes L = {w$w | w is element of {0,1}*}
-// Same as machine2.tm but uses MissingEdgeReject to save some edges
+// Same as machine2.tm but uses RejectMissingEdges to save some edges
 
 q1 = {start, (1->x,R,q3), ($->$,R,q8), (0->x,R,q2)}
 q2 = {(0->0,R,q2),(1->1,R,q2),($->$,R,q4)}
@@ -11,4 +11,4 @@ q7 = {(0->0,L,q7),(1->1,L,q7),(x->x,R,q1)}
 q8 = {(x->x,R,q8),(#->#,R,qaccept)}
 qaccept = {accept}
 
-MissingEdgeReject()
+RejectMissingEdges()

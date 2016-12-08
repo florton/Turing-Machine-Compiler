@@ -14,9 +14,9 @@ except:
 input = machine[0]
 output = machine[1]
 states = machine[2]
-edgeReject = machine[3]
+functions = machine[3]
 tape = []
-    
+
 def Run():
 
     #Process Input
@@ -37,9 +37,11 @@ def Run():
             reject.append(state)    
 
     #Run Through States
-    tapePosition = 0
     currentState = start
-    while(True):
+    tapePosition = 0
+    while(True):      
+        if functions['debug']:
+            Debug(tapePosition,currentState,functions['debug'])             
         if tape[-1] != '#' or tapePosition == len(tape)-1:
             tape.append('#')    
         if currentState in accept:
@@ -53,7 +55,7 @@ def Run():
         try:
             currentEdge = currentState['edges'][str(tape[tapePosition])]
         except:
-            if edgeReject:
+            if functions['rejectEdges']:
                 Output()
                 return False
             error = "Could not find an edge for char: '" + str(tape[tapePosition]) + "' from state: " + str(currentState['name'])
@@ -82,5 +84,13 @@ def Output():
                 final = final + char
         print final
 
+def Debug(tapePosition,currentState,flags):
+    print "Current State: " + currentState['name']
+    print tape
+    print ''.rjust(5*tapePosition)+'  ^'
+    if flags == 'slow':
+        raw_input()
+    
+        
 if __name__ == "__main__":
     print Run()
