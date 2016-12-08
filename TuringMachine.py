@@ -29,20 +29,19 @@ def Run():
     accept = []
     reject = []
     for name, state in states.iteritems():
-        if state['modifier'] == 'start':
+        if state['start']:
             start = state
-        elif state['modifier'] == 'accept':
+        if state['modifier'] == 'accept':
             accept.append(state)
-        elif state['modifier'] == 'reject':
+        if state['modifier'] == 'reject':
             reject.append(state)    
 
     #Run Through States
     tapePosition = 0
     currentState = start
     while(True):
-        if tape[-1] != '#':
-            tape.append('#')
-            
+        if tape[-1] != '#' or tapePosition == len(tape)-1:
+            tape.append('#')    
         if currentState in accept:
             Output()
             return True

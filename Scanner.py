@@ -12,9 +12,9 @@ def Scan(file):
     except:
         raise RuntimeError("Please specify a valid turing language file")
         
-    stateRegex = re.compile("(\w+)={(start|accept|reject)?,?(\S*)}")
-    edgeRegex = re.compile(",?\((\S)->(\S),(R|S|L),(\w+)\)")
-    inputRegex = re.compile("Input\((\S*)\)")
+    stateRegex = re.compile("(\w+)={(start)?,?(accept|reject)?,?(\S*)}")
+    edgeRegex = re.compile(",?\((.)->(.),(R|S|L),(\w+)\)")
+    inputRegex = re.compile("Input\((.*)\)")
     outputRegex = re.compile("Output\(((\d+|),?(\d+|))\)")
     failRegex = re.compile("MissingEdgeReject\(\)")
     commentRegex = re.compile("//.*")
@@ -34,8 +34,9 @@ def Scan(file):
         if reMatch is not None:
             parsedEdges = {}
             stateName = reMatch.group(1)
-            modifier = reMatch.group(2)
-            line = reMatch.group(3)
+            start = True if reMatch.group(2)=='start' else False
+            modifier = reMatch.group(3)
+            line = reMatch.group(4)
             edges = re.findall(edgeRegex,line)
             for edge in edges:
                 readChar = edge[0]
@@ -43,7 +44,7 @@ def Scan(file):
                 nextMove = edge[2]
                 nextState = edge[3]
                 parsedEdges[readChar] = (writeChar,nextMove,nextState)
-            states[stateName] = {'name': stateName,'modifier':modifier,'edges':parsedEdges}
+            states[stateName] = {'name': stateName,'start':start, 'modifier':modifier,'edges':parsedEdges}
             continue
         reMatch = re.match(inputRegex,line)
         if reMatch is not None:

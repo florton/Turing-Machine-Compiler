@@ -75,6 +75,14 @@ Output(3)
 
 or `name = {modifier}` if it is an accept or reject state
 
+if you want a machine to always accept or reject you can have the start state accept of reject
+````
+//HelloWorld.tm
+Input(Hello_World!)
+q1 = {start, accept}
+Output()
+````
+
 **name** must consist of one or more non-whitespace characters.
 
 names must be unique for each state
