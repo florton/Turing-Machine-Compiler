@@ -19,6 +19,8 @@ Output()
 ```
 ###Usage
 
+Have TuringMachine.py & Scanner.py in the same directory. Then call:
+
 `python TuringMachine.py machine.tm`
 
 ###Output for machine.tm
@@ -166,6 +168,20 @@ However, sometimes you want a machine to reject if it gets to a state it cannot 
 So, to make your machine reject if it hits a missing edge, call `RejectMissingEdges()` once anywhere in your fie.
 
 see `machine2.tm` & `machine3.tm` for an example
+
+###Pipe Output
+
+Normally the machine will return `True` or `False` and then print the tape if `Output()` is called
+
+However, sometimes you want to directly pipe the tape to standard out to send to a file or other program
+
+to do this just call `Pipe()` once anywhere in the file
+
+This will output the full tape (or subsection specified by Output())  as a string, on accept
+
+and will output the string `X` on reject
+
+Dont forget to call `RejectMissingEdges()` if you need to assure the machine doesnt just crash for bad input.
 
 ###Debug
 

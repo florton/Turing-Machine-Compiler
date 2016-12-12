@@ -45,19 +45,16 @@ def Run():
         if tape[-1] != '#' or tapePosition == len(tape)-1:
             tape.append('#')    
         if currentState in accept:
-            Output()
-            return True
+            return Return(True)
         if currentState in reject:
-            Output()
-            return False
+            return Return(False)
             
         #Run deterministic edge
         try:
             currentEdge = currentState['edges'][str(tape[tapePosition])]
         except:
             if functions['rejectEdges']:
-                Output()
-                return False
+                return Return(False)
             error = "Could not find an edge for char: '" + str(tape[tapePosition]) + "' from state: " + str(currentState['name'])
             print "Current position: " + str(tapePosition)
             print tape
@@ -69,20 +66,29 @@ def Run():
             tapePosition = tapePosition-1 if tapePosition!=0 else 0
         currentState = states[currentEdge[2]]
 
+def Return(bool):
+    final = Output()
+    if bool == False:
+        return 'X'
+    if(functions['pipe']):
+        return final
+    if(final != None):
+        print final
+    return bool
+        
 def Output():
     #Print Output (Tape Subsection)
     if output is not None:
         final = ''
         start = 0
-        end = len(tape)-1
+        end = tape.index('#')
         if output[0] != '':
             start = int(output[0])
         if output[1] != '':    
-            end = int(output[1])
-            
+            end = int(output[1])    
         for char in tape[start:end]:
                 final = final + char
-        print final
+        return final
 
 def Debug(tapePosition,currentState,flags):
     print "Current State: " + currentState['name']

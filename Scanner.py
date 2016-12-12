@@ -18,12 +18,13 @@ def Scan(file):
     outputRegex = re.compile("Output\(((\d+|),?(\d+|))\)")
     failRegex = re.compile("RejectMissingEdges\(\)")
     debugRegex = re.compile("Debug\((slow)?\)")
+    pipeRegex = re.compile("Pipe\(()?\)")
     commentRegex = re.compile("//.*")
         
     input = ""
     states = {}
     output = None
-    functions = {'rejectEdges' : False, 'debug': False}
+    functions = {'rejectEdges' : False, 'debug': False, 'pipe':False}
     for line in turingMachine:
         line = line.replace(" ", "")
         if line == '\n':
@@ -58,6 +59,11 @@ def Scan(file):
         reMatch = re.match(failRegex,line)
         if reMatch is not None:
             functions['rejectEdges'] = True
+            continue
+        reMatch = re.match(pipeRegex,line)
+        if reMatch is not None:
+            functions['pipe'] = True
+            output = ['',''] if output is None else output
             continue
         reMatch = re.match(debugRegex,line)
         if reMatch is not None:

@@ -10,4 +10,4 @@ q5 ={(1->1,L,q5),(0->0,L,q5),(x->x,R,q0)}
 qaccept = {accept}
 qreject = {reject}
 
-//Debug(slow)
+Debug(slow)
