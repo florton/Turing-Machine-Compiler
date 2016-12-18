@@ -68,9 +68,9 @@ def Run():
 
 def Return(bool):
     final = Output()
-    if bool == False:
-        return 'X'
     if(functions['pipe']):
+        if bool == False:
+            return 'X'
         return final
     if(final != None):
         print final

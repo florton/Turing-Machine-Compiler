@@ -1,4 +1,4 @@
-//Machine recognized { w$w | w is an element of {a,b}* }
+//Machine recognizes { w$w | w is an element of {a,b}* }
 // aaba$aaba -> True
 // aaa$aab - > False
 

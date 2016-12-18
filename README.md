@@ -1,7 +1,7 @@
 #Turing Machine Language Interpreter in Python
 ### © Flanders Lorton 2016
 
-####I wrote this language and interpreter from scratch to generate turing machines and run them in Python.
+####I wrote this language and interpreter from scratch to generate turing machines and run them in Python 2.7
 
 ####This language is turing complete by definition
 
@@ -12,7 +12,7 @@ The input starts with '$'. The '$' will be overwritten if the 1 is carried out.
 ###machine.tm
 ```
 Input($1011)
-q1 = {start, (1->1,R,q1), (0->0,R,q1), ($->$,R,q1), (#->#,L,q2)} 
+q1 = {start, (1->1,R,q1), (0->0,R,q1), ($->$,R,q1), (#->#,L,q2)}
 q2 = {(1->0,L,q2), (0->1,S,q3), ($->1,S,q3)}
 q3 = {accept}
 Output()
@@ -73,7 +73,7 @@ Output(3)
 ###States
 **states** must be written in the following format
 
-`name = {modifier, edges }`or `name = { edges }` 
+`name = {modifier, edges }`or `name = { edges }`
 
 or `name = {modifier}` if it is an accept or reject state
 
@@ -157,7 +157,7 @@ Output()                                       //me four
 
 ###RejectMissingEdges
 
-Because Turing Machine Language has some minor error reporting, 
+Because Turing Machine Language has some minor error reporting,
 
 If the machine cannot find an edge for the current state and tape value it will crash and give an error such as:
 
