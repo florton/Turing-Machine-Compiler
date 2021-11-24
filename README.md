@@ -35,7 +35,7 @@ The machine returns `True` if it hits an accept state
 
 The machine returns `False` if it hits a reject state
 
-There is so guarantee the machine will ever stop if it never hits an accept or reject
+There is no guarantee the machine will ever stop if it never hits an accept or reject
 
 ### Input
 Input can only be called once
@@ -196,5 +196,3 @@ If you want to pause between transitions call `Debug(slow)` to make the interpre
 ### Bugs&Errors
 
 This interpreter is new and is not extensively tested.
-
-Report bugs to florton@lion.lmu.edu
